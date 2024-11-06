@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -57,12 +58,50 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignUp(props) {
+  const navigate = useNavigate()
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (nameError || emailError || passwordError) { 
+      return;
+    }
+    const data = new FormData(event.currentTarget);
+    const name = data.get('name');
+    const email = data.get('email');
+    const password = data.get('password');
+
+    try{
+      const response = await fetch('/api/signup',{
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({name, email, password})
+
+      });
+      if(response.ok){
+        const result = await response.json();
+        console.log('Login Successful:', result);
+        navigate('/signin');
+      }else{
+        const error = await response.json();
+        console.log('Login Failed', error)
+        setEmailError(true)
+        setEmailErrorMessage('Email already exists! Please sign in or select a different email')
+      }
+    }catch (error){
+      console.log('Error occured', error);
+      setEmailError(true);
+      setEmailErrorMessage('Something went wrong. Please try again.')
+    }
+
+  };
 
   const validateInputs = () => {
     const email = document.getElementById('email');
@@ -101,19 +140,7 @@ export default function SignUp(props) {
     return isValid;
   };
 
-  const handleSubmit = (event) => {
-    if (nameError || emailError || passwordError) {
-      event.preventDefault();
-      return;
-    }
-    const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get('name'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  
 
   return (
     <>

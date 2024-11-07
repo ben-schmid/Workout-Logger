@@ -1,2 +1,5 @@
+*** MAKE SURE YOU CD INTO FRONT-END FIRST BEFORE DOING NPM INSTALL ***
+
 npm install
 npm install react-router-dom
+npm install @mui/material @emotion/react @emotion/styled

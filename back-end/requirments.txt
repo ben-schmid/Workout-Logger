@@ -1,0 +1,22 @@
+FLASK INSTALL
+
+
+WIDNOWS**
+
+cd back-end
+py -3 -m venv .venv
+.venv\Scripts\activate
+pip install Flask
+
+MAC
+cd back-end
+python3 -m venv .venv
+. .venv/bin/activate
+pip install Flask
+
+
+
+if you get an error after running .venv\scripts\activate:
+Open powershell as admin
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+when prompted, type "A"

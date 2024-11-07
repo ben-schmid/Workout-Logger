@@ -6,7 +6,7 @@ class User:
     def __init__(self, email, password, name):
 
         self.email = email
-        self.passwrod = password
+        self.password = password
         self.name = name
         # try:
         #     self.client = MongoClient('localhost', 27017) #27017 is default port number for MongoDB
@@ -15,6 +15,7 @@ class User:
         # self.db = self.client['user_db']
         # self.users_collection = self.db['user_accounts']
 
+    @staticmethod
     def validate_login(email, password):
         if email == "test@urmom.com" and password == "123456":
             return True 

@@ -25,6 +25,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
     padding: theme.spacing(4),
     gap: theme.spacing(2),
     margin: 'auto',
+    
     [theme.breakpoints.up('sm')]: {
       maxWidth: '450px',
     },
@@ -135,7 +136,11 @@ const Card = styled(MuiCard)(({ theme }) => ({
     return (
       <>
         <CssBaseline enableColorScheme />
-        <SignInContainer direction="column" justifyContent="space-between">
+        <SignInContainer
+          direction="column" 
+          justifyContent="space-between"
+          backgroundColor= '#131316'
+         >
           <Card variant="outlined">
             <SiteLogo/>
             <Typography

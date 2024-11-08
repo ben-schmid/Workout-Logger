@@ -146,7 +146,11 @@ export default function SignUp(props) {
     <>
       <CssBaseline enableColorScheme />
    
-      <SignUpContainer direction="column" justifyContent="space-between">
+      <SignUpContainer
+        direction="column" 
+        justifyContent="space-between"
+        backgroundColor= '#131316'
+      >
         <Card variant="outlined">
         <SiteLogo/>
           <Typography

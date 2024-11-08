@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Quiz from "../components/Quiz";
 import SiteLogo from "../components/logo";
+import Navbar from "../components/Navbar"
 import './Home.css';
 import NumberFlow from '@number-flow/react';
 
@@ -48,11 +49,7 @@ export default function Home (){
    
     return(
         <>
-            <nav class="navbar">
-                <a href="/home">HOME</a>
-                <a href="/lorum">VIEW WORKOUTS</a>
-                <a href="/home">SIGN OUT</a>
-            </nav>
+            <Navbar/>
             <section class = "hidden">
                 <div className = 'title'>
                     <h1>Workout Generator </h1> <SiteLogo/>

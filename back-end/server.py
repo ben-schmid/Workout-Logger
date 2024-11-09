@@ -22,7 +22,6 @@ def login():
 
 
 @app.route('/api/signup', methods=['POST'])
-@app.route('/api/create_account', methods=['POST'])
 def create_account(): #listens for post requests from "/signup"
     data = request.get_json()
     email = data.get('email')

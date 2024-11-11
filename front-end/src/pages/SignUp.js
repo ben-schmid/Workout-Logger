@@ -34,6 +34,8 @@ const Card = styled(MuiCard)(({ theme }) => ({
   }),
 }));
 
+
+
 const SignUpContainer = styled(Stack)(({ theme }) => ({
   height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
   minHeight: '100%',
@@ -88,12 +90,12 @@ export default function SignUp(props) {
       if(response.ok){
         const result = await response.json();
         console.log('Login Successful:', result);
-        navigate('/signin');
+        navigate('/login');
       }else{
         const error = await response.json();
         console.log('Login Failed', error)
         setEmailError(true)
-        setEmailErrorMessage('Email already exists! Please sign in or select a different email')
+        setEmailErrorMessage('Email already exists! Please sign in')
       }
     }catch (error){
       console.log('Error occured', error);

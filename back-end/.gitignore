@@ -2,3 +2,4 @@
 /.venv/include
 /.venv/Lib
 /.venv/scripts
+__pycache__

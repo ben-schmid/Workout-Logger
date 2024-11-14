@@ -37,7 +37,7 @@ const day4 = [
     createData('Bulgarian Split Squats', 3, '8 (per leg)', ' '),
     createData('Face Pulls', 3, 12, ''),
     createData('Plank', 3, 'AMRAP', '')
-]
+];
 export default function Pplx4(){
     return(
         <>
@@ -51,9 +51,7 @@ export default function Pplx4(){
                 <WorkoutTable data={day3}/>
                 <h1> DAY 4: FULL BODY </h1>
                 <WorkoutTable data={day4}/>
-            </div>
-        
+            </div> 
         </>
-                    
-    )
+    );
 }

@@ -1,54 +1,20 @@
 import * as React from 'react';
-import { styled, createTheme} from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import './Workouts.css';
-import ProjectName from '../../components/ProjectName';
 import Navbar from '../../components/Navbar';
+import WorkoutTable from '../../components/WorkoutTable';
 
-const theme = createTheme({
-    palette: {
-        primary:{
-            main: '#E0C2FF',
-        },
-    },
-});
-
-const StyledTableContainer = styled(TableContainer)({
-    width: 'auto',
-    maxWidth: '700px',
-    margin: '0 auto', 
-    display: 'block',
-});
-
-const StyledTableCell = styled(TableCell)(({theme}) =>({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-        fontSize: 16,
-    },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.primary.main
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0,
-    },
-  }));
 
 function createData(exercise, sets, reps, weight){
     return { exercise, sets, reps, weight};
 }
-
-const rows1 = [ 
+const day1 = [
+    createData('Squats', 4, "6-8", ' '),
+    createData('Walking Lunges', 3, '10 (per leg)', ' '),
+    createData('Leg Press', 3, '12', ' '),
+    createData('Hamstring Curls', 3, 15, ' '),
+    createData('Standing Calf Raises', 3, 15,' ' ),    
+];
+const day2 = [ 
     createData('Bench Press', 4, '6-8', ' '),
     createData('Overhead Shoulder Press', 4, '6-8',' '),
     createData('Dumbell Incline Press:', 3, 10,' '),
@@ -56,7 +22,7 @@ const rows1 = [
     createData('Tricep Dips', 3,'8-10',' '),
     createData('Tricep Rope Pushdown', 3, 12, ' '),
 ];
-const rows2 = [ 
+const day3 = [ 
     createData('Barbell Rows', 4, '8', ' '),
     createData('Lat Pulldowns', 4, '10',' '),
     createData('Face Pulls:', 3, 15,' '),
@@ -64,60 +30,27 @@ const rows2 = [
     createData('EZ Bar Curls', 3,'6-8',' '),
     createData('Bayesian  Cable Curles', 2, 15, ' '),
 ];
-
+const day4 = [
+    createData('Deadlift', 4, 5, ' '),
+    createData('Incline Dumbell Press', 3, 10, ' '),
+    createData('Chinups', 3,10, ' '),
+    createData('Bulgarian Split Squats', 3, '8 (per leg)', ' '),
+    createData('Face Pulls', 3, 12, ''),
+    createData('Plank', 3, 'AMRAP', '')
+]
 export default function Pplx4(){
     return(
         <>
             <Navbar/>
-            <div className="content-below-navbar">
-                <StyledTableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Exercise</StyledTableCell>
-                                <StyledTableCell>Sets</StyledTableCell>
-                                <StyledTableCell>Reps</StyledTableCell>
-                                <StyledTableCell>Weight</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows1.map((row) =>(
-                                <StyledTableRow key = {row.exercise}>
-                                    <StyledTableCell component="th" scope="row">
-                                        {row.exercise}
-                                    </StyledTableCell>
-                                    <StyledTableCell>{row.sets}</StyledTableCell>
-                                    <StyledTableCell>{row.reps}</StyledTableCell>
-                                    <StyledTableCell>{row.weight}</StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </StyledTableContainer>
-                <StyledTableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Exercise</StyledTableCell>
-                                <StyledTableCell>Sets</StyledTableCell>
-                                <StyledTableCell>Reps</StyledTableCell>
-                                <StyledTableCell>Weight</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows2.map((row) =>(
-                                <StyledTableRow key = {row.exercise}>
-                                    <StyledTableCell component="th" scope="row">
-                                        {row.exercise}
-                                    </StyledTableCell>
-                                    <StyledTableCell>{row.sets}</StyledTableCell>
-                                    <StyledTableCell>{row.reps}</StyledTableCell>
-                                    <StyledTableCell>{row.weight}</StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </StyledTableContainer>
+            <div className='content-below-navbar'>
+                <h1> DAY 1: LEGS </h1>
+                <WorkoutTable  data={day1}/>
+                <h1> DAY 2: PUSH </h1>
+                <WorkoutTable  data={day2}/>
+                <h1> DAY 3: PULL </h1>
+                <WorkoutTable  data={day3}/>
+                <h1> DAY 4: FULL BODY </h1>
+                <WorkoutTable  data={day4}/>
             </div>
         
         </>

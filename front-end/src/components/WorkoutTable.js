@@ -3,6 +3,7 @@ import { styled, createTheme} from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { TextField } from '@mui/material';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -26,7 +27,7 @@ const StyledTableContainer = styled(TableContainer)({
 
 const StyledTableCell = styled(TableCell)(({theme}) =>({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: '#0081b4',
         color: theme.palette.common.white,
         fontSize: 16,
     },
@@ -34,7 +35,7 @@ const StyledTableCell = styled(TableCell)(({theme}) =>({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.primary.main
+      backgroundColor: '#d7d7d7',
     },
     // hide last border
     '&:last-child td, &:last-child th': {
@@ -42,10 +43,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
   }));
 
-  function WorkoutTable( {data}){
+  export default function WorkoutTable( {data}){
     return(
         <StyledTableContainer component={Paper} sx={{ marginBottom: '50px' }}>
-            <Table className='workout-table' sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table className='workout-table' sx={{ minWidth: 600 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Exercise</StyledTableCell>
@@ -62,7 +63,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
                             </StyledTableCell> 
                             <StyledTableCell>{row.sets}</StyledTableCell>
                             <StyledTableCell>{row.reps}</StyledTableCell>
-                            <StyledTableCell>{row.weight}</StyledTableCell>
+                            <StyledTableCell>
+                                <TextField
+                                    variant='standard'
+                                    size='small'
+                                    value={row.wheight}
+                                />
+                            </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
@@ -70,4 +77,3 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         </StyledTableContainer>
     )
   }
-  export default WorkoutTable;

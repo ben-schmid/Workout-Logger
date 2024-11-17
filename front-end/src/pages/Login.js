@@ -13,8 +13,10 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 
 import SiteLogo from "../components/logo"
+/*
+ When the quiz submits, backend should determine what workout is best for quiz results
 
-
+*/
 
 
 const Card = styled(MuiCard)(({ theme }) => ({

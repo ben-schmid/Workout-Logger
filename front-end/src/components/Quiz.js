@@ -20,6 +20,15 @@ import FormLabel from '@mui/material/FormLabel';
       ],
     },
 }
+
+
+
+the quizResults are sent as an array where quizResults[0] is the first question in the quiz and the value stored 
+is the selected answer from the user
+
+ex. what is your gender? this is quizResults[0]
+if user selects male then quizResults[0] = 0
+if user selects female,   quizResults[0] = 1
 */
 
 export default function RadioButtonsGroup() {
@@ -29,7 +38,7 @@ export default function RadioButtonsGroup() {
   const [quizResults, setQuizResults] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionSuccess, setSubmissionSuccess] = useState(false);
+  const setSubmissionSuccess = useState(false);
   const [selectedOption, setSelectedOption] = useState(null); 
 
   const questions = [
@@ -90,7 +99,8 @@ export default function RadioButtonsGroup() {
       options: [
         { id: 0, text: "4" },
         { id: 1, text: "5" },
-        { id: 2, text: "6" },
+        { id: 2, text: "I mostly want to lose fat." },
+        { id: 3, text: "I want to build an even combination of muscle and strenght." },
       ],
     },
   ];
@@ -100,7 +110,7 @@ export default function RadioButtonsGroup() {
    
     // find the current selected option.Then update the quizResults array
     const selectedOptionId = questions[currentQuestion].options.find((option) => option.text === selectedOption)?.id;
-    
+    console.log('quizResults = ', selectedOptionId)
     if(selectedOptionId !== undefined){
       setQuizResults((prevResults) => { 
           const updatedResults = [...prevResults];
@@ -147,6 +157,7 @@ export default function RadioButtonsGroup() {
       if (response.ok){
         setSubmissionSuccess(true);
         const result = await response.json();
+        console.log('Success submitting quiz', result)
         // navigate somewher here maybe  
       }else{
         const error = await response.json();

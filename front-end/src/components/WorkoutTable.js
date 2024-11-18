@@ -1,21 +1,14 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, createTheme} from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { TextField } from '@mui/material';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-
-const theme = createTheme({
-    palette: {
-        primary:{
-            main: '#E0C2FF',
-        },
-    },
-});
 
 const StyledTableContainer = styled(TableContainer)({
     width: 'auto',
@@ -26,7 +19,7 @@ const StyledTableContainer = styled(TableContainer)({
 
 const StyledTableCell = styled(TableCell)(({theme}) =>({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: '#0081b4',
         color: theme.palette.common.white,
         fontSize: 16,
     },
@@ -34,7 +27,7 @@ const StyledTableCell = styled(TableCell)(({theme}) =>({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.primary.main
+      backgroundColor: '#d7d7d7',
     },
     // hide last border
     '&:last-child td, &:last-child th': {
@@ -42,10 +35,66 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
   }));
 
-  function WorkoutTable( {data}){
+  export default function WorkoutTable( {data, routineType}){
+
+    const [weights, setWeights] = useState({});
+
+    
+        const loadWeight = async() =>{
+            try{
+                const response = await fetch(`/api/weights/${routineType}`)
+                const savedWeight = await response.json();
+                setWeights(savedWeight);
+            }catch (error){
+                console.error('Error loading weights', error);
+            }
+        };
+    useEffect(() =>{
+        loadWeight();
+    }, [routineType]);
+
+    const handleWeightChange = async (exercise, value) => {
+        const newWeights = {
+            ...weights,
+            [exercise]: value
+        };
+        setWeights(newWeights);
+
+
+        // testing to see what data is being sent to back end in console
+        const data = {
+            routineType,
+            exercise,
+            weight: value
+        };
+    
+        console.log('Data:', JSON.stringify(data));
+        //end of testing
+
+        //send and save to backend database
+        try{    
+           const response = await fetch('/api/weights',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    routineType,
+                    exercise,
+                    weight: value
+
+
+                }),
+            });
+        
+        }catch (error){
+            console.error('Error saving weight', error);
+        }
+    };
+
     return(
         <StyledTableContainer component={Paper} sx={{ marginBottom: '50px' }}>
-            <Table className='workout-table' sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table className='workout-table' sx={{ minWidth: 600 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Exercise</StyledTableCell>
@@ -62,7 +111,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
                             </StyledTableCell> 
                             <StyledTableCell>{row.sets}</StyledTableCell>
                             <StyledTableCell>{row.reps}</StyledTableCell>
-                            <StyledTableCell>{row.weight}</StyledTableCell>
+                            <StyledTableCell>
+                                <TextField
+                                    variant='standard'
+                                    size='small'
+                                    value={weights[row.exercise] || ''}  
+                                    onChange={(e) => handleWeightChange(row.exercise, e.target.value)}  
+                                />
+                            </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
@@ -70,4 +126,3 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         </StyledTableContainer>
     )
   }
-  export default WorkoutTable;

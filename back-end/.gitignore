@@ -3,3 +3,4 @@
 /.venv/Lib
 /.venv/scripts
 __pycache__
+.env

@@ -47,7 +47,42 @@ class Workout:
         except PyMongoError as e:
             print(f"Error creating workout plan in MongoDB: {e}")
             return None
-        
+    
+
+    def update_weight(self, routine_type, exercise, weight):
+        try:
+            print(f"Updating weight for user_id={self.user_id}, routine_type={routine_type}, exercise={exercise}, weight={weight}")
+
+            workout_plan = self.workouts_collection.find_one({
+                "user_id": self.user_id,
+                "routine_type": routine_type
+            })
+
+            if not workout_plan:
+                print("Workout plan not found. Creating a new workout plan.")
+                workout_plan = {
+                    "user_id": self.user_id,
+                    "routine_type": routine_type,
+                }
+
+            update_result = self.workouts_collection.update_one(
+                {
+                    "user_id": self.user_id,
+                    "routine_type": routine_type,
+                    "days.exercises.name": exercise
+                },
+                {
+                    "$set": {"days.$.exercises.$[exercise].weight": weight}
+                },
+                array_filters=[{"exercise.name": exercise}],
+                upsert=True
+            )
+            if update_result.modified_count > 0:
+                print("Weight updated successfully")
+            else:
+                print("Error updating the weight")
+        except PyMongoError as e:
+            print(f"Error updating weight for exercise in MongoDB: {e}")
 
     # def add_or_update_weight(self, routine_type, exercise, weight):
     #     try:
@@ -97,13 +132,3 @@ class Workout:
     #     except PyMongoError as e:
     #         print(f"Error deleting exercise from MongoDB: {e}")
 
-
-    # def update_weight(self, day, exercise, new_weight):
-    #     try:
-    #         self.workouts_collection.update_one(
-    #             {"user_id": self.user_id, "days.day": day, "days.exercises.name": exercise},
-    #             {"$set": {"days.$.exercises.$[exercise].weight": new_weight}},
-    #             array_filters=[{"exercise.name": exercise}]
-    #         )
-    #     except PyMongoError as e:
-    #         print(f"Error updating weight for exercise: {e}")

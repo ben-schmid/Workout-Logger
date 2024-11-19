@@ -4,7 +4,7 @@ from workout import Workout
 from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
-
+from pymongo.errors import PyMongoError
 
 app = Flask(__name__)
 
@@ -102,6 +102,27 @@ def determine_routine_type(quiz_results):
             raise ValueError("Invalid primary goal value")
 
     return routine_type
+
+@app.route('/api/weights', methods=['POST'])
+def update_weight():
+    data = request.get_json()
+
+    if not data or 'user_id' not in data or 'routineType' not in data or 'exercise' not in data or 'weight' not in data:
+        return jsonify({"error": "missing required fields"})
+    
+    user_id = data['user_id']
+    routine_type = data['routineType']
+    exercise = data['exercise']
+    weight = data['weight']
+
+    try:
+        workout = Workout(user_id, db)
+        workout.update_weight(routine_type, exercise, weight)
+    except PyMongoError as e:
+        return jsonify({"error": str(e)}), 500
+    
+    return jsonify({"status": "Weight updated successfully"}), 200
+    
 
 if __name__ == "__main__":
     app.run(debug=True)

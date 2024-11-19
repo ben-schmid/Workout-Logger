@@ -1,4 +1,5 @@
 
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';  // <-- Add this import statement
 import Button from './Button.js'
 import Radio from '@mui/material/Radio';
@@ -40,7 +41,7 @@ export default function RadioButtonsGroup() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const setSubmissionSuccess = useState(false);
   const [selectedOption, setSelectedOption] = useState(null); 
-
+  const navigate = useNavigate();
   const questions = [
     {
       text: "What is your gender?",
@@ -161,7 +162,7 @@ export default function RadioButtonsGroup() {
         setSubmissionSuccess(true);
         const result = await response.json();
         console.log('Success submitting quiz', result)
-        // navigate somewher here maybe  
+        navigate(`/workouts${result.routine_type}`);
       }else{
         const error = await response.json();
         console.log('Failed to send quiz:', error)

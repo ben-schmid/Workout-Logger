@@ -69,7 +69,7 @@ def handle_quiz():
     #finally:
         #workout.close_connection()
 
-    return jsonify({"status": "Workout plan generated based on quiz", "result": routine_type}), 200
+    return jsonify({"status": "success", "result": routine_type}), 200
 
 def determine_routine_type(quiz_results):
     experience_level = quiz_results[5]

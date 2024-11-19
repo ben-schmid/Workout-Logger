@@ -26,7 +26,7 @@ def login():
     status = User.validate_login(email, password)
 
     if status:
-        return jsonify({"status": "successful"}), 201
+        return jsonify({"status": "successful", "email": email}), 201
     else:
         return jsonify({"status": "unsuccessful"}), 401
     

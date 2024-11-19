@@ -45,10 +45,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         const loadWeight = async() =>{
             try{
                 const userEmail = getEmail();
-                if (!userEmail){
-                    console.log('No user logged in')
-                    navigate('/login');
-                }
+                // if (!userEmail){
+                //     console.log('No user logged in')
+                //     navigate('/login');
+                // }
                 const response = await fetch(`/api/weights/${routineType}`)
                 const savedWeight = await response.json();
                 setWeights(savedWeight);

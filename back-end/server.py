@@ -60,24 +60,30 @@ def handle_quiz():
         routine_type = determine_routine_type(quiz_results)
         workout.generate_workout_plan(routine_type)
     except ValueError as e:
-        return jsonify({"error": str(e)}), 400
+        print("Value Error")
+        return jsonify({"error": str(e)}), 401
+
     except Exception as e:
+        print("Error")
         return jsonify({"error": "An error occurred while generating the workout plan"}), 500
-    finally:
-        workout.close_connection()
+    #finally:
+        #workout.close_connection()
 
     return jsonify({"status": "Workout plan generated based on quiz"}), 200
 
 def determine_routine_type(quiz_results):
-    experience_level = quiz_results['experience']
-    primary_goal = quiz_results['goal']
-    training_days = quiz_results['days_per_week']
+    experience_level = quiz_results[2]
+    primary_goal = quiz_results[4]
+    training_days = quiz_results[6]
 
     if experience_level == 0:
         if training_days == 6:
             training_days = 5
         routine_type = f'fundamentals{training_days}x'
+    
     else:
+        if training_days == 3:
+            training_days = 4
         if primary_goal == 0:
             routine_type = f'bodybuilding{training_days}x'  # Pure body building
         elif primary_goal == 1:

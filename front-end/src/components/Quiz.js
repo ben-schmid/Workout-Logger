@@ -82,7 +82,7 @@ export default function RadioButtonsGroup() {
       options: [
         { id: 0, text: "I mostly want to build muscle." },
         { id: 1, text: "I mostly want to gain strength." },
-        { id: 2, text: "I mostly want to lose fat." },
+        { id: 2, text: "I want to gain muscle, but strength is important too" },
         { id: 3, text: "I want to build an even combination of muscle and strenght." },
       ],
     },
@@ -97,10 +97,10 @@ export default function RadioButtonsGroup() {
     {
       text: "How many days/week can you train?",
       options: [
-        { id: 0, text: "4" },
-        { id: 1, text: "5" },
-        { id: 2, text: "I mostly want to lose fat." },
-        { id: 3, text: "I want to build an even combination of muscle and strenght." },
+        { id: 0, text: "3" },
+        { id: 1, text: "4" },
+        { id: 2, text: "5" },
+        { id: 3, text: "6" },
       ],
     },
   ];
@@ -146,6 +146,9 @@ export default function RadioButtonsGroup() {
   const submitQuiz = async() => {
     setIsSubmitting(true);
     try{
+      const userID = 'ben.schmid1@gmail.com';
+      const submissionData = { user_id: userID, quizResults };
+      console.log('Submitting the following data:', JSON.stringify(submissionData, null, 2));
       const response = await fetch('/api/quiz',{
         method: 'POST',
         headers: {

@@ -155,7 +155,7 @@ export default function RadioButtonsGroup() {
           'Content-Type' : 'application/json',
           
         },
-        body: JSON.stringify({quizResults})
+        body: JSON.stringify({user_id: userID, quizResults})
       });
       if (response.ok){
         setSubmissionSuccess(true);

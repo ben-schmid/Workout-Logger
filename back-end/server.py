@@ -69,10 +69,10 @@ def handle_quiz():
     #finally:
         #workout.close_connection()
 
-    return jsonify({"status": "Workout plan generated based on quiz"}), 200
+    return jsonify({"status": "Workout plan generated based on quiz", "result": routine_type}), 200
 
 def determine_routine_type(quiz_results):
-    experience_level = quiz_results[2]
+    experience_level = quiz_results[5]
     primary_goal = quiz_results[4]
     training_days = quiz_results[6]
 
@@ -83,6 +83,12 @@ def determine_routine_type(quiz_results):
     
     else:
         if training_days == 3:
+            training_days = 6
+        elif training_days == 2:
+            training_days = 5
+        elif training_days == 1:
+            training_days = 4
+        else:
             training_days = 4
         if primary_goal == 0:
             routine_type = f'bodybuilding{training_days}x'  # Pure body building

@@ -1,12 +1,14 @@
 
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';  // <-- Add this import statement
+import React, { useState } from 'react'; 
 import Button from './Button.js'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { getEmail } from '../utils/localStorage.js';
+
 
 /* Template
 { 
@@ -39,9 +41,10 @@ export default function RadioButtonsGroup() {
   const [quizResults, setQuizResults] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const setSubmissionSuccess = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null); 
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
   const navigate = useNavigate();
+
   const questions = [
     {
       text: "What is your gender?",
@@ -147,8 +150,13 @@ export default function RadioButtonsGroup() {
   const submitQuiz = async() => {
     setIsSubmitting(true);
     try{
-      const userID = 'ben.schmid1@gmail.com';
-      const submissionData = { user_id: userID, quizResults };
+      const userEmail = getEmail();
+      if (!userEmail){
+        console.log('No user email found');
+        navigate('/login');
+        return;
+      }
+      const submissionData = { user_id: userEmail, quizResults };
       console.log('Submitting the following data:', JSON.stringify(submissionData, null, 2));
       const response = await fetch('/api/quiz',{
         method: 'POST',
@@ -156,13 +164,13 @@ export default function RadioButtonsGroup() {
           'Content-Type' : 'application/json',
           
         },
-        body: JSON.stringify({user_id: userID, quizResults})
+        body: JSON.stringify({user_id: userEmail, quizResults})
       });
       if (response.ok){
         setSubmissionSuccess(true);
         const result = await response.json();
         console.log('Success submitting quiz', result)
-        navigate(`/workouts${result.routine_type}`);
+        navigate(`/workouts/${result.result}`)
       }else{
         const error = await response.json();
         console.log('Failed to send quiz:', error)

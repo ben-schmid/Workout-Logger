@@ -13,10 +13,8 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 
 import SiteLogo from "../components/logo"
-/*
- When the quiz submits, backend should determine what workout is best for quiz results
 
-*/
+import { saveEmail } from '../utils/localStorage';
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -93,6 +91,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
         if (response.ok){
           const result = await response.json();
           //navigate to home page after succesful login
+          saveEmail(result.email);
           navigate('/home');
         }else{
           const error = await response.json();

@@ -8,7 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import { useNavigate } from 'react-router-dom';
+import { getEmail } from '../utils/localStorage';
 
 const StyledTableContainer = styled(TableContainer)({
     width: 'auto',
@@ -38,10 +39,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   export default function WorkoutTable( {data, routineType}){
 
     const [weights, setWeights] = useState({});
+    const navigate = useNavigate();
 
     
         const loadWeight = async() =>{
             try{
+                const userEmail = getEmail();
+                if (!userEmail){
+                    console.log('No user logged in')
+                    navigate('/login');
+                }
                 const response = await fetch(`/api/weights/${routineType}`)
                 const savedWeight = await response.json();
                 setWeights(savedWeight);
@@ -72,13 +79,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         //end of testing
 
         //send and save to backend database
-        try{    
+        try{
+            const userEmail = getEmail();
+            if (!userEmail){
+                console.log('No user logged in')
+                navigate('/login');
+            }
            const response = await fetch('/api/weights',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    user_id: userEmail,
                     routineType,
                     exercise,
                     weight: value

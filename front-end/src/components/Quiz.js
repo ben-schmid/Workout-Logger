@@ -6,6 +6,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { getEmail } from '../utils/localStorage.js';
+import { useNavigate } from 'react-router-dom';
 
 /* Template
 { 
@@ -39,7 +41,8 @@ export default function RadioButtonsGroup() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const setSubmissionSuccess = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null); 
+  const [selectedOption, setSelectedOption] = useState(null);
+  const navigate = useNavigate();
 
   const questions = [
     {
@@ -146,8 +149,12 @@ export default function RadioButtonsGroup() {
   const submitQuiz = async() => {
     setIsSubmitting(true);
     try{
-      const userID = 'ben.schmid1@gmail.com';
-      const submissionData = { user_id: userID, quizResults };
+      const userEmail = getEmail();
+      if (!userEmail){
+        console.log('No user email found');
+        navigate('/login');
+      }
+      const submissionData = { user_id: userEmail, quizResults };
       console.log('Submitting the following data:', JSON.stringify(submissionData, null, 2));
       const response = await fetch('/api/quiz',{
         method: 'POST',
@@ -155,7 +162,7 @@ export default function RadioButtonsGroup() {
           'Content-Type' : 'application/json',
           
         },
-        body: JSON.stringify({user_id: userID, quizResults})
+        body: JSON.stringify({user_id: userEmail, quizResults})
       });
       if (response.ok){
         setSubmissionSuccess(true);

@@ -74,22 +74,14 @@ def handle_quiz():
 def determine_routine_type(quiz_results):
     experience_level = quiz_results[5]
     primary_goal = quiz_results[4]
-    training_days = quiz_results[6]
+    training_days = quiz_results[6] + 3
+    print(f'training_days: {training_days}')
 
     if experience_level == 0:
         if training_days == 6:
             training_days = 5
         routine_type = f'fundamentals{training_days}x'
     
-    else:
-        if training_days == 3:
-            training_days = 6
-        elif training_days == 2:
-            training_days = 5
-        elif training_days == 1:
-            training_days = 4
-        else:
-            training_days = 4
         if primary_goal == 0:
             routine_type = f'bodybuilding{training_days}x'  # Pure body building
         elif primary_goal == 1:
@@ -122,7 +114,21 @@ def update_weight():
         return jsonify({"error": f"Failed to update weight: {str(e)}"}), 500
     
     return jsonify({"status": "Weight updated successfully"}), 200
-    
+
+@app.route('/api/loadweights', methods=['GET'])
+def send_weights():
+    user_id = request.args.get('user_id')
+    routine_type = request.args.get('routineType')
+
+    try:
+        workout = Workout(user_id, db)
+        result = workout.load_weights(routine_type)
+        print(f'result: {result}')
+        return jsonify(result), 200
+    except PyMongoError as e:
+        print(f'error: {e}')
+        return 'error loading weights', 500
+  
 
 if __name__ == "__main__":
     app.run(debug=True)

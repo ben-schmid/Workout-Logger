@@ -47,7 +47,7 @@ const day4 = [
     createData('Standing Calf Raises', 4, 20, '')
 ];
 
-export default function Bodybuildingx4(){
+export default function Bodybuilding4x(){
     return(
         <>
             <Navbar/>
@@ -58,13 +58,13 @@ export default function Bodybuildingx4(){
                 </div>
                 <h2>4X PER WEEK: UPPER LOWER</h2>
                 <h3> DAY 1: UPPER BODY </h3>
-                <WorkoutTable data={day1} routineType="bodybuildingx4" />
+                <WorkoutTable data={day1} routineType="bodybuilding4x" />
                 <h3> DAY 2: LOWER BODY </h3>
-                <WorkoutTable data={day2} routineType="bodybuildingx4" />
+                <WorkoutTable data={day2} routineType="bodybuilding4x" />
                 <h3> DAY 3: UPPER BODY </h3>
-                <WorkoutTable data={day3} routineType="bodybuildingx4" />
+                <WorkoutTable data={day3} routineType="bodybuilding4x" />
                 <h3> DAY 4: LOWER BODY</h3>
-                <WorkoutTable data={day4} routineType="bodybuildingx4" />
+                <WorkoutTable data={day4} routineType="bodybuilding4x" />
             </div> 
         </>
     );

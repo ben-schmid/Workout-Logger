@@ -50,7 +50,7 @@ const day5 = [
     createData('Calf Raises (seated)', 4, 20, '')
 ];
 
-export default function Bodybuildingx5(){
+export default function Bodybuilding5x(){
     return(
         <>
             <Navbar/>
@@ -61,15 +61,15 @@ export default function Bodybuildingx5(){
                 </div>
                 <h2>4X PER WEEK: UPPER LOWER</h2>
                 <h3> DAY 1: CHEST </h3>
-                <WorkoutTable data={day1} routineType="bodybuildingx5" />
+                <WorkoutTable data={day1} routineType="bodybuilding5x" />
                 <h3> DAY 2: BACK </h3>
-                <WorkoutTable data={day2} routineType="bodybuildingx5" />
+                <WorkoutTable data={day2} routineType="bodybuilding5x" />
                 <h3> DAY 3: SHOULDERS </h3>
-                <WorkoutTable data={day3} routineType="bodybuildingx5" />
+                <WorkoutTable data={day3} routineType="bodybuilding5x" />
                 <h3> DAY 4: ARMS</h3>
-                <WorkoutTable data={day4} routineType="bodybuildingx5" />
+                <WorkoutTable data={day4} routineType="bodybuilding5x" />
                 <h3> DAY 5: LEGS</h3>
-                <WorkoutTable data={day5} routineType="bodybuildingx5" />
+                <WorkoutTable data={day5} routineType="bodybuilding5x" />
             </div> 
         </>
     );

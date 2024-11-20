@@ -97,22 +97,57 @@ class Workout:
         try:
             print(f"Updating weight for user_id={self.user_id}, routine_type={routine_type}, exercise={exercise}, weight={weight}")
 
-            update_result = self.workouts_collection.update_one(
+            # First, check if the exercise already exists
+            existing_exercise = self.workouts_collection.find_one(
                 {
                     "user_id": self.user_id,
                     "routine_type": routine_type,
                     "exercises.name": exercise
-                },
-                {
-                    "$set": {"exercises.$.weight": weight}
-                },
+                }
             )
-            if update_result.modified_count > 0:
-                print("Weight updated successfully")
+
+            if existing_exercise:
+                # If the exercise exists, update its weight
+                update_result = self.workouts_collection.update_one(
+                    {
+                        "user_id": self.user_id,
+                        "routine_type": routine_type,
+                        "exercises.name": exercise
+                    },
+                    {
+                        "$set": {"exercises.$.weight": weight}
+                    }
+                )
+
+                if update_result.modified_count > 0:
+                    print("Weight updated successfully")
+                    return "Weight updated successfully"
+                else:
+                    print("Error updating the weight")
+                    return "Error updating the weight"
             else:
-                print("Error updating the weight")
+                # If the exercise does not exist, add it to the array
+                print("Exercise not found, adding a new entry.")
+                add_result = self.workouts_collection.update_one(
+                    {
+                        "user_id": self.user_id,
+                        "routine_type": routine_type
+                    },
+                    {
+                        "$push": {"exercises": {"name": exercise, "weight": weight}}
+                    }
+                )
+
+                if add_result.modified_count > 0:
+                    print("New exercise added successfully")
+                    return "New exercise added successfully"
+                else:
+                    print("Error adding the new exercise")
+                    return "Error adding the new exercise"
         except PyMongoError as e:
             print(f"Error updating weight for exercise in MongoDB: {e}")
+            return f"Error: {e}"
+
 
     # def add_or_update_weight(self, routine_type, exercise, weight):
     #     try:

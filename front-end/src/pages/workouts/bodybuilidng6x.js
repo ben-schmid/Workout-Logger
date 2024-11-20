@@ -57,7 +57,7 @@ const day6 = [
     createData('Standing Calf Raises', 4, 20, '')
 ];
 
-export default function Bodybuildingx6(){
+export default function Bodybuilding6x(){
     return(
         <>
             <Navbar/>
@@ -68,17 +68,17 @@ export default function Bodybuildingx6(){
                 </div>
                 <h2>6X PER WEEK: PUSH PULL LEGS SPLIT</h2>
                 <h3> DAY 1: PUSH </h3>
-                <WorkoutTable data={day1} routineType="bodybuildingx6" />
+                <WorkoutTable data={day1} routineType="bodybuilding6x" />
                 <h3> DAY 2: PULL </h3>
-                <WorkoutTable data={day2} routineType="bodybuildingx6" />
+                <WorkoutTable data={day2} routineType="bodybuilding6x" />
                 <h3> DAY 3: LEGS </h3>
-                <WorkoutTable data={day3} routineType="bodybuildingx6" />
+                <WorkoutTable data={day3} routineType="bodybuilding6x" />
                 <h3> DAY 4: PUSH</h3>
-                <WorkoutTable data={day4} routineType="bodybuildingx6" />
+                <WorkoutTable data={day4} routineType="bodybuilding6x" />
                 <h3> DAY 5: PULL</h3>
-                <WorkoutTable data={day5} routineType="bodybuildingx6" />
+                <WorkoutTable data={day5} routineType="bodybuilding6x" />
                 <h3> DAY 6: LEGS</h3>
-                <WorkoutTable data={day6} routineType="bodybuildingx6" />
+                <WorkoutTable data={day6} routineType="bodybuilding6x" />
             </div> 
         </>
     );

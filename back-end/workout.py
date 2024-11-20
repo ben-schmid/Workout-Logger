@@ -18,7 +18,6 @@ class Workout:
             print(f"Error reteriving workout plan from MongoDB: {e}")
             return None
         
-
     def generate_workout_plan(self, routine_type):
         try:
             print(f"Generating workout plan for user_id={self.user_id}, routine_type={routine_type}")
@@ -31,59 +30,15 @@ class Workout:
 
             workout_plan = {
                 "user_id": self.user_id,
-                "routine_type": routine_type,
-                "exercises": [
-                    {"name": "Squat", "weight": ""},
-                    {"name": "Bench Press", "weight": ""},
-                    {"name": "Deadlift", "weight": ""},
-                    {"name": "Seated Cable Row", "weight": ""},
-                    {"name": "Dumbbell Shoulder Press", "weight": ""},
-                    {"name": "Dumbbell Incline Press", "weight": ""},
-                    {"name": "Lat Pulldown", "weight": ""},
-                    {"name": "Barbell Curl", "weight": ""},
-                    {"name": "Skull Crushers", "weight": ""},
-                    {"name": "Leg Press", "weight": ""},
-                    {"name": "Romanian Deadlifts", "weight": ""},
-                    {"name": "Hamstring Curls", "weight": ""},
-                    {"name": "Leg Extensions", "weight": ""},
-                    {"name": "Calf Raises", "weight": ""},
-                    {"name": "T-Bar Row", "weight": ""},
-                    {"name": "Cable Lateral Raises", "weight": ""},
-                    {"name": "Pec Deck Machine", "weight": ""},
-                    {"name": "Dumbbell Pullover", "weight": ""},
-                    {"name": "Dumbbell Hammer Curls", "weight": ""},
-                    {"name": "Tricep Rope Pushdown", "weight": ""},
-                    {"name": "Leg Curl Machine", "weight": ""},
-                    {"name": "Bulgarian Split Squats", "weight": ""},
-                    {"name": "Lateral Raises", "weight": ""},
-                    {"name": "Barbell Row", "weight": ""},
-                    {"name": "Face Pulls", "weight": ""},
-                    {"name": "Dumbbell Curls", "weight": ""},
-                    {"name": "Dumbbell Bench Press", "weight": ""},
-                    {"name": "Seated Shoulder Press Machine", "weight": ""},
-                    {"name": "Cable Flys", "weight": ""},
-                    {"name": "Dumbbell Lateral Raises", "weight": ""},
-                    {"name": "Hammer Curls", "weight": ""},
-                    {"name": "Dumbbell Lunges", "weight": ""},
-                    {"name": "Overhead Press", "weight": ""},
-                    {"name": "Dumbbell Row", "weight": ""},
-                    {"name": "Cable Crunch", "weight": ""},
-                    {"name": "Incline Dumbbell Bench Press", "weight": ""},
-                    {"name": "Dumbbell Flys", "weight": ""},
-                    {"name": "Rear Delt Flys", "weight": ""},
-                    {"name": "Close Grip Bench Press", "weight": ""},
-                    {"name": "Tricep Dips (Weighted if possible)", "weight": ""},
-                    {"name": "Pull-Ups (Weighted if possible)", "weight": ""},
-                    {"name": "Seated Dumbbell Shoulder Press", "weight": ""},
-                    {"name": "Preacher Curl", "weight": ""},
-                    {"name": "Pause Squat", "weight": ""}
-                ]
+                "routine_type": routine_type
             }
             
             print("Attempting to insert workout plan into the database.")
             insert_result = self.workouts_collection.insert_one(workout_plan)
             if insert_result.acknowledged:
                 print(f"Workout plan for '{routine_type}' created successfully with ID {insert_result.inserted_id}.")
+                print(f"Inserted workout plan: {workout_plan}")
+                print(f"All records in the collection after insert: {list(self.workouts_collection.find())}")
             else:
                 print(f"Workout plan insertion not acknowledged by MongoDB.")
             return workout_plan
@@ -91,43 +46,42 @@ class Workout:
         except PyMongoError as e:
             print(f"Error creating workout plan in MongoDB: {e}")
             return None
-    
+        
+    def load_weights(self, routine_type):
+        try:
+            print(f'loading weight for user_id={self.user_id}, routine_type={routine_type}')
+            workout = self.workouts_collection.find_one({'user_id': self.user_id, 'routine_type': routine_type})
+            if not workout:
+                return []
+            result = []
+            exercises = workout.get('exercises', [])
+            for exercise in exercises:
+                result.append({'exercise': exercise['name'], 'weight': exercise['weight']})
+            return result
+        except PyMongoError as e:
+            print(f'error loading weights: {e}')
+            return []
+
 
     def update_weight(self, routine_type, exercise, weight):
         try:
             print(f"Updating weight for user_id={self.user_id}, routine_type={routine_type}, exercise={exercise}, weight={weight}")
 
-            # First, check if the exercise already exists
-            existing_exercise = self.workouts_collection.find_one(
+            
+            update_result = self.workouts_collection.update_one(
                 {
                     "user_id": self.user_id,
                     "routine_type": routine_type,
                     "exercises.name": exercise
+                },
+                {
+                    "$set": {"exercises.$.weight": weight}
                 }
             )
 
-            if existing_exercise:
-                # If the exercise exists, update its weight
-                update_result = self.workouts_collection.update_one(
-                    {
-                        "user_id": self.user_id,
-                        "routine_type": routine_type,
-                        "exercises.name": exercise
-                    },
-                    {
-                        "$set": {"exercises.$.weight": weight}
-                    }
-                )
-
-                if update_result.modified_count > 0:
-                    print("Weight updated successfully")
-                    return "Weight updated successfully"
-                else:
-                    print("Error updating the weight")
-                    return "Error updating the weight"
+            if update_result.modified_count > 0:
+                print("Weight updated successfully")
             else:
-                # If the exercise does not exist, add it to the array
-                print("Exercise not found, adding a new entry.")
                 add_result = self.workouts_collection.update_one(
                     {
                         "user_id": self.user_id,
@@ -140,13 +94,10 @@ class Workout:
 
                 if add_result.modified_count > 0:
                     print("New exercise added successfully")
-                    return "New exercise added successfully"
                 else:
                     print("Error adding the new exercise")
-                    return "Error adding the new exercise"
         except PyMongoError as e:
             print(f"Error updating weight for exercise in MongoDB: {e}")
-            return f"Error: {e}"
 
 
     # def add_or_update_weight(self, routine_type, exercise, weight):

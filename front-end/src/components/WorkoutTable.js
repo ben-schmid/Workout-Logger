@@ -8,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import { getEmail } from '../utils/localStorage';
 
@@ -39,103 +41,121 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   export default function WorkoutTable( {data, routineType}){
 
     const [weights, setWeights] = useState({});
+    const [debounceWeights, setDebounceWeights] = useState(null);
+    const [loading, setLoading] = useState(true); //loading state
     const navigate = useNavigate();
 
     
         const loadWeight = async() =>{
             try{
                 const userEmail = getEmail();
-                // if (!userEmail){
-                //     console.log('No user logged in')
-                //     navigate('/login');
-                // }
-                const response = await fetch(`/api/weights/${routineType}`)
+                if (!userEmail){
+                     console.log('No user logged in')
+                     navigate('/login');
+                }
+                const response = await fetch(`/api/loadweights?user_id=${userEmail}&routineType=${routineType}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+
+                });
                 const savedWeight = await response.json();
-                setWeights(savedWeight);
+                console.log('Saved weights:', savedWeight);
+                const weightMap = savedWeight.reduce((acc, item) => {
+                    acc[item.exercise] = item.weight;
+                    return acc;
+                }, {});
+        
+                setWeights(weightMap); // Set transformed weights object
             }catch (error){
                 console.error('Error loading weights', error);
+            } finally{
+                setLoading(false);
             }
         };
     useEffect(() =>{
         loadWeight();
     }, [routineType]);
 
-    const handleWeightChange = async (exercise, value) => {
-        const newWeights = {
-            ...weights,
-            [exercise]: value
-        };
-        setWeights(newWeights);
-
-
-        // testing to see what data is being sent to back end in console
-        const data = {
-            routineType,
-            exercise,
-            weight: value
-        };
-    
-        console.log('Data:', JSON.stringify(data));
-        //end of testing
-
-        //send and save to backend database
-        try{
-            const userEmail = getEmail();
-            if (!userEmail){
-                console.log('No user logged in')
-                navigate('/login');
+    useEffect(() => {
+        if (!debounceWeights) return;
+        const timer = setTimeout(async()=>{
+            const {exercise, weight} = debounceWeights;
+            try{
+                const userEmail = getEmail();
+                if (!userEmail){
+                    console.log('No user logged in')
+                    navigate('/login');
+                }
+                await fetch('/api/weights',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userEmail,
+                        routineType,
+                        exercise,
+                        weight
+                    }),
+                }); 
+            }catch (error){
+                console.error('Error saving weight', error);
             }
-           const response = await fetch('/api/weights',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    user_id: userEmail,
-                    routineType,
-                    exercise,
-                    weight: value
+        }, 500); //500ms delay, send data 500ms after user stops typing
 
-
-                }),
-            });
+        return () => clearTimeout(timer);
+    }, [debounceWeights]);
         
-        }catch (error){
-            console.error('Error saving weight', error);
-        }
+    const handleWeightChange = (exercise, value) => {
+        setWeights ((prev) => ({
+            ...prev,
+            [exercise]: value,
+        }));
+        setDebounceWeights({exercise, weight: value});
     };
 
     return(
-        <StyledTableContainer component={Paper} sx={{ marginBottom: '50px' }}>
-            <Table className='workout-table' sx={{ minWidth: 600 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Exercise</StyledTableCell>
-                        <StyledTableCell>Sets</StyledTableCell>
-                        <StyledTableCell>Reps</StyledTableCell>
-                        <StyledTableCell>Weight</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((row) =>(
-                        <StyledTableRow key = {row.exercise}>
-                            <StyledTableCell component="th" scope="row">
-                            {row.exercise}
-                            </StyledTableCell> 
-                            <StyledTableCell>{row.sets}</StyledTableCell>
-                            <StyledTableCell>{row.reps}</StyledTableCell>
-                            <StyledTableCell>
-                                <TextField
-                                    variant='standard'
-                                    size='small'
-                                    value={weights[row.exercise] || ''}  
-                                    onChange={(e) => handleWeightChange(row.exercise, e.target.value)}  
-                                />
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </StyledTableContainer>
-    )
+        <>
+            {loading ? (
+                <Box sx = {{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh'}}>
+                    <CircularProgress />
+                </Box>
+            ):(
+        
+            <StyledTableContainer component={Paper} sx={{ marginBottom: '50px' }}>
+                <Table className='workout-table' sx={{ minWidth: 600 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Exercise</StyledTableCell>
+                            <StyledTableCell>Sets</StyledTableCell>
+                            <StyledTableCell>Reps</StyledTableCell>
+                            <StyledTableCell>Weight</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.map((row) =>(
+                            <StyledTableRow key = {row.exercise}>
+                                <StyledTableCell component="th" scope="row">
+                                {row.exercise}
+                                </StyledTableCell> 
+                                <StyledTableCell>{row.sets}</StyledTableCell>
+                                <StyledTableCell>{row.reps}</StyledTableCell>
+                                <StyledTableCell>
+                                    <TextField
+                                        variant='standard'
+                                        size='small'
+                                        value={weights[row.exercise] || ''}  
+                                        onChange={(e) => handleWeightChange(row.exercise, e.target.value)}  
+                                    />
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </StyledTableContainer>
+            )}
+        </>
+    );
   }

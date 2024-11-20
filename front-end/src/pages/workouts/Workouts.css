@@ -31,7 +31,7 @@
     font-family: sans-serif ;
 
 }
-h2 {
+.contents h2 {
     color: #ffffff;
     font-size: 30px;
     font-family: sans-serif;
@@ -39,7 +39,7 @@ h2 {
     margin-bottom: 150px;
 }
 
-h3 {
+.contents h3 {
     color: #ffffff;
     font-size: 30px;
     font-family: sans-serif;

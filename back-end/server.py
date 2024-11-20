@@ -119,7 +119,7 @@ def update_weight():
         workout = Workout(user_id, db)
         workout.update_weight(routine_type, exercise, weight)
     except PyMongoError as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"Failed to update weight: {str(e)}"}), 500
     
     return jsonify({"status": "Weight updated successfully"}), 200
     

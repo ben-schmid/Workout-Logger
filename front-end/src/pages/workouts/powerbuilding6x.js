@@ -13,13 +13,13 @@ const day1 = [
     createData('Bench Press', 5, '4-6', ''),
     createData('Overhead Press', 4, 6, ''),
     createData('Close Grip Bench Press', 3, 8, ''),
-    createData('Tricep Dips (Weighted if possible)', 3, 8, '')
+    createData('Tricep Dips', 3, 8, '')
 ];
 
 const day2 = [
     createData('Deadlift', 4, 4, ''),
     createData('Barbell Row', 4, 6, ''),
-    createData('Pull-Ups (Weighted if possible)', 3, 8, ''),
+    createData('Pull-Ups', 3, 8, ''),
     createData('Face Pulls', 3, 12, ''),
     createData('Barbell Curl', 3, 10, '')
 ];
@@ -56,13 +56,16 @@ const day6 = [
 ];
 
 export default function Powerbuilding6x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>
             <div className="content-below-navbar">
                 
                 <div className='title'>
-                    <h1>POWER BUILDING</h1> <SiteLogo/>
+                    <h1>POWERBUILDING</h1> <SiteLogo/>
                 </div>
                 <h2>6X PER WEEK </h2>
                 <h3> DAY 1: PUSH  (STRENGTH)</h3>

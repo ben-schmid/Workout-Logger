@@ -10,10 +10,29 @@ class Workout:
         self.workouts_collection = self.db['user_workouts']
         print("Connection established")
 
-    def get_workout_plan(self, routine_type):
+    def get_workouts(self):
         try:
-            print(f"Fetching workout plan for user_id={self.user_id}, routine_type={routine_type}")
-            return self.workouts_collection.find_one({"user_id": self.user_id, "routine_type": routine_type})
+            print(f"Fetching workout plan for user_id={self.user_id}")
+            result = self.workouts_collection.find({"user_id": self.user_id}, {"routine_type": 1, "_id": 0})
+            workouts = []
+            for  workout in result:
+                if workout['routine_type'] == 'ppl4x':
+                    workouts.append({"id": "ppl4x", "name": "PUSH PULL LEGS 4X"})
+                elif workout['routine_type'] == 'ppl5x':
+                    workouts.append({"id": "ppl5x", "name": "PUSH PULL LEGS 5X"})
+                elif workout['routine_type'] == 'ppl6x':
+                    workouts.append({"id": "ppl6x", "name": "PUSH PULL LEGS 6X"})
+                else:
+                    routine_type = workout["routine_type"]
+                    formatted_name = routine_type[:-2] + " " + routine_type[-2:]
+                    formatted_name = formatted_name.replace("_", " ").upper()  
+                    workouts.append({"id": routine_type, "name": formatted_name})
+            if workouts:
+                print(f"Workouts found: {workouts}")
+                return workouts
+            else:
+                print("No workouts found")
+                return[]
         except PyMongoError as e:
             print(f"Error reteriving workout plan from MongoDB: {e}")
             return None
@@ -98,53 +117,19 @@ class Workout:
                     print("Error adding the new exercise")
         except PyMongoError as e:
             print(f"Error updating weight for exercise in MongoDB: {e}")
-
-
-    # def add_or_update_weight(self, routine_type, exercise, weight):
-    #     try:
-    #         self.workouts_collection.update_one(
-    #             {"user_id": self.user_id, "routine_type": routine_type, "days.exercises.name": exercise},
-    #             {
-    #                 "$set": {"days.$.exercises.$[exercise].weight": weight},
-    #                 "$setOnInsert": {"days": [{"day": "Day 1", "exercises": [{"name": exercise, "weight": weight, "sets": "", "reps": ""}]}]}
-    #             },
-    #             array_filters=[{"exercise.name": exercise}],
-    #             upsert=True
-    #         )
-    #     except PyMongoError as e:
-    #         print(f"Error adding or updating weight in MongoDB: {e}")
     
-
-    # def add_exercise(self, day, exercise):
-    #     try:
-    #         self.workouts_collection.update_one(
-    #             {"user_id": self.user_id, "days.day": day},
-    #             {"$push": {"days.$.exercises": exercise}}
-    #         )
-    #     except PyMongoError as e:
-    #         print(f"Error adding exercise to MongoDB: {e}")
-    
-
-    # def get_exercise_by_routine_type(self, routine_type):
-    #     try:
-    #         workout_plan = self.get_workout_plan(routine_type)
-    #         if workout_plan:
-    #             exercises = []
-    #             for day in workout_plan.get("days", []):
-    #                 exercises.extend(day.get("exercises", []))
-    #             return exercises
-    #         return[]
-    #     except PyMongoError as e:
-    #         print(f"Error retrieving exercises from MongoDB: {e}")
-    #         return []
-
-
-    # def delete_exercise(self, day, exercise):
-    #     try:
-    #         self.workouts_collection.update_one(
-    #             {"user_id": self.user_id, "days.day": day},
-    #             {"$pull": {"days.$.exercises": exercise}}
-    #         )
-    #     except PyMongoError as e:
-    #         print(f"Error deleting exercise from MongoDB: {e}")
-
+    def delete_workout(self, routine_type): 
+        try:
+            print(f"Deleting workout for user_id={self.user_id}, routine_type={routine_type}")
+            delete_result = self.workouts_collection.delete_one(
+                {
+                    "user_id": self.user_id,
+                    "routine_type": routine_type
+                }
+            )
+            if delete_result.deleted_count > 0:
+                print("Workout deleted successfully")
+            else:
+                print("Error deleting workout")
+        except PyMongoError as e:
+            print(f"Error deleting workout in MongoDB: {e}")

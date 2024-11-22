@@ -25,10 +25,10 @@ const day2 = [
 
 const day3 = [
     createData('Deadlift', 5, '3-5', ''),
-    createData('Rack Pulls (focus on lockout)', 3, 5, ''),
+    createData('Rack Pulls', 3, 5, ''),
     createData('Barbell Row', 4, 8, ''),
     createData('Lat Pulldown', 3, 10, ''),
-    createData('Plank', 3, 'Hold for 60 seconds', '')
+    createData('Plank', 3, '60 seconds', '')
 ];
 
 const day4 = [
@@ -48,17 +48,20 @@ const day5 = [
 ];
 
 export default function Powerlifting5x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>
             <div className="content-below-navbar">
                 
                 <div className='title'>
-                    <h1>POWER LIFTING</h1> <SiteLogo/>
+                    <h1>POWERLIFTING</h1> <SiteLogo/>
                 </div>
                 <h2>5X PER WEEK </h2>
                 <h3> DAY 1: SQUAT FOCUS</h3>
-                <WorkoutTable data={day1} routineType="ppowerlifting5x" />
+                <WorkoutTable data={day1} routineType="powerlifting5x" />
                 <h3> DAY 2: BENCH FOCUS </h3>
                 <WorkoutTable data={day2} routineType="powerlifting5x"/>
                 <h3> DAY 3: DEADLIFT FOCUS </h3>

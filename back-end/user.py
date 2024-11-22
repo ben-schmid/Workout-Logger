@@ -25,8 +25,8 @@ class User:
     @staticmethod
     def validate_login(email, password):
         try:
-            username = "ClarkBen1225"
-            atlas_password = "Atlas1225"
+            username = os.getenv("MONGO_USERNAME")
+            atlas_password = os.getenv("MONGO_PASSWORD")
             dbname = "mydb"
             connection = f'mongodb+srv://{username}:{atlas_password}@cluster0.x20eh.mongodb.net/{dbname}?retryWrites=true&w=majority&appName=Cluster0'
 

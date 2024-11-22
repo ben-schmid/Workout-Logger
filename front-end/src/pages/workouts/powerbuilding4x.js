@@ -13,7 +13,7 @@ const day1 = [
     createData('Bench Press', 4, '4-6', ''),
     createData('Barbell Row', 4, 6, ''),
     createData('Overhead Press', 3, 6, ''),
-    createData('Pull-Ups (Weighted if possible)', 3, 8, ''),
+    createData('Pull-Ups', 3, 8, ''),
     createData('Skull Crushers', 3, 10, ''),
     createData('Dumbbell Curls', 3, 10, '')
 ];
@@ -23,7 +23,7 @@ const day2 = [
     createData('Deadlift', 4, 4, ''),
     createData('Bulgarian Split Squats', 3, '8 (per leg)', ''),
     createData('Leg Press', 3, 10, ''),
-    createData('Calf Raises (seated or standing)', 4, 15, '')
+    createData('Calf Raises', 4, 15, '')
 ];
 
 const day3 = [
@@ -41,17 +41,20 @@ const day4 = [
     createData('Leg Extension', 3, 15, ''),
     createData('Hamstring Curl Machine', 3, 15, ''),
     createData('Calf Raises', 4, 20, ''),
-    createData('Plank', 3, 'Hold as long as possible', '')
+    createData('Plank', 3, 'AMRAP', '')
 ];
 
 export default function Powerbuilding4x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>
             <div className="content-below-navbar">
                 
                 <div className='title'>
-                    <h1>POWER BUILDING</h1> <SiteLogo/>
+                    <h1>POWERBUILDING</h1> <SiteLogo/>
                 </div>
                 <h2>4X PER WEEK </h2>
                 <h3> DAY 1: UPPER BODY STRENGTH </h3>

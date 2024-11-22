@@ -52,13 +52,16 @@ const day5 = [
 ];
 
 export default function Powerbuilding5x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>
             <div className="content-below-navbar">
                 
                 <div className='title'>
-                    <h1>POWER BUILDING</h1> <SiteLogo/>
+                    <h1>POWERBUILDING</h1> <SiteLogo/>
                 </div>
                 <h2>5X PER WEEK </h2>
                 <h3> DAY 1: CHEST AND BACK (STRENGTH)</h3>

@@ -14,7 +14,7 @@ const day1 = [
     createData('Incline Dumbbell Press', 4, 10, ''),
     createData('Chest Fly Machine', 3, 12, ''),
     createData('Cable Flys (High to Low)', 3, 15, ''),
-    createData('Push-Ups (weighted, if possible)', 3, 'To failure', '')
+    createData('Push-Ups', 3, 'AMRAP', '')
 ];
 
 const day2 = [
@@ -51,6 +51,10 @@ const day5 = [
 ];
 
 export default function Bodybuilding5x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
+    
     return(
         <>
             <Navbar/>

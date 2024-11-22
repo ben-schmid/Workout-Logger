@@ -13,7 +13,7 @@ const day1 = [
     createData('Bench Press', 4, 5, ''),
     createData('Incline Dumbbell Press', 3, 8, ''),
     createData('Dumbbell Flys', 3, 12, ''),
-    createData('Push-Ups', 3, 'To failure', '')
+    createData('Push-Ups', 3, 'AMRAP', '')
 ];
 
 const day2 = [
@@ -45,6 +45,9 @@ const day5 = [
 ];
 
 export default function Fundamentals5x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>

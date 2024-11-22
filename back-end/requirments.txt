@@ -13,7 +13,7 @@ MAC
 cd back-end
 python3 -m venv .venv
 . .venv/bin/activate
-pip install Flask Flask-CORS pymongo bcrypt
+pip install Flask Flask-CORS pymongo bcrypt python-dotenv 
 
 
 

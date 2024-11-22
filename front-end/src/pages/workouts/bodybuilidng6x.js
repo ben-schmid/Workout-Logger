@@ -19,7 +19,7 @@ const day1 = [
 
 const day2 = [
     createData('Deadlift', 4, 6, ''),
-    createData('Pull-Ups (or Lat Pulldowns)', 4, 10, ''),
+    createData('Lat Pulldowns', 4, 10, ''),
     createData('Barbell Row', 4, 10, ''),
     createData('Face Pulls', 3, 12, ''),
     createData('Dumbbell Curls', 3, 12, '')
@@ -58,6 +58,9 @@ const day6 = [
 ];
 
 export default function Bodybuilding6x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>

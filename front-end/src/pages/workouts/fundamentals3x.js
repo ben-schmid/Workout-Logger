@@ -14,7 +14,7 @@ const day1 = [
     createData('Bench Press', 4, 5, ''),
     createData('Lat Pulldown', 3, '8-10', ''),
     createData('Dumbbell Lunges', 3, '10 (per leg)', ''),
-    createData('Plank', 3, 'Hold for 30-60 seconds', '')
+    createData('Plank', 3, '60 Seconds', '')
 ];
 
 const day2 = [
@@ -34,6 +34,9 @@ const day3 = [
 ];
 
 export default function Fundamentals3x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>

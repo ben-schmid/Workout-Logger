@@ -27,41 +27,44 @@ const day3 = [
     createData('Deadlift', 5, 3, ''),
     createData('Block Pulls or Rack Pulls', 3, 5, ''),
     createData('Barbell Row', 4, 8, ''),
-    createData('Plank', 3, 'Hold for 60 seconds', '')
+    createData('Plank', 3, '60 seconds', '')
 ];
 
 const day4 = [
-    createData('Squat (lighter weight, focus on form)', 4, 5, ''),
+    createData('Squat', 4, 5, ''),
     createData('Bulgarian Split Squat', 3, '8 (per leg)', ''),
     createData('Leg Curl Machine', 4, 10, ''),
     createData('Calf Raises', 4, 15, '')
 ];
 
 const day5 = [
-    createData('Bench Press (lighter weight, focus on form)', 4, 5, ''),
+    createData('Bench Press', 4, 5, ''),
     createData('Overhead Press', 3, 8, ''),
     createData('Pull-Ups', 4, 8, ''),
     createData('Tricep Rope Pushdown', 3, 12, '')
 ];
 
 const day6 = [
-    createData('Deadlift (lighter weight, focus on form)', 4, 5, ''),
+    createData('Deadlift', 4, 5, ''),
     createData('Romanian Deadlift', 3, 8, ''),
     createData('Lunges', 3, '10 (per leg)', ''),
     createData('Cable Crunch', 3, 15, '')
 ];
 
 export default function Powerlifting6x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>
             <div className="content-below-navbar">
                 <div className='title'>
-                    <h1>POWER LIFTING</h1> <SiteLogo/>
+                    <h1>POWERLIFTING</h1> <SiteLogo/>
                 </div>
-                <h2>6 PER WEEK </h2>
+                <h2>6X PER WEEK </h2>
                 <h3> DAY 1: HEAVY SQUAT</h3>
-                <WorkoutTable data={day1} routineType="ppowerlifting6x" />
+                <WorkoutTable data={day1} routineType="powerlifting6x" />
                 <h3> DAY 2: HEAVY BENCH </h3>
                 <WorkoutTable data={day2} routineType="powerlifting6x"/>
                 <h3> DAY 3: HEAVY DEADLIFT  </h3>

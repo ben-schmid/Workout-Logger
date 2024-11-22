@@ -31,15 +31,15 @@
     font-family: sans-serif ;
 
 }
-.contents h2 {
+h2 {
     color: #ffffff;
-    font-size: 30px;
+    font-size: 40px;
     font-family: sans-serif;
     margin-top: 0px;
     margin-bottom: 150px;
 }
 
-.contents h3 {
+h3 {
     color: #ffffff;
     font-size: 30px;
     font-family: sans-serif;

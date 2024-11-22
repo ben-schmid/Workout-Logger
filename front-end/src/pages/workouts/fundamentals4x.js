@@ -29,7 +29,7 @@ const day3 = [
     createData('Romanian Deadlift', 3, 5, ''),
     createData('Barbell Row', 3, 8, ''),
     createData('Lat Pulldown', 3, 10, ''),
-    createData('Plank', 3, 'Hold for 30 seconds', '')
+    createData('Plank', 3, '30 seconds', '')
 ];
 
 const day4 = [
@@ -40,6 +40,9 @@ const day4 = [
     createData('Calf Raises', 4, 15, '')
 ];
 export default function Fundamentals4x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>

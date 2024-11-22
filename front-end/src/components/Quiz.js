@@ -87,7 +87,7 @@ export default function RadioButtonsGroup() {
         { id: 0, text: "I mostly want to build muscle." },
         { id: 1, text: "I mostly want to gain strength." },
         { id: 2, text: "I want to gain muscle, but strength is important too" },
-        { id: 3, text: "I want to build an even combination of muscle and strenght." },
+        { id: 3, text: "I want to build an even combination of muscle and strength." },
       ],
     },
     {

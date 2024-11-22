@@ -11,7 +11,7 @@ function createData(exercise, sets, reps, weight){
 
 const day1 = [
     createData('Squat', 5, '3-5', ''),
-    createData('Pause Squat (focus on depth and control)', 3, 5, ''),
+    createData('Pause Squat', 3, 5, ''),
     createData('Leg Press', 4, 8, ''),
     createData('Hanging Leg Raise', 3, 12, '')
 ];
@@ -26,14 +26,14 @@ const day2 = [
 
 const day3 = [
     createData('Deadlift', 5, '3-5', ''),
-    createData('Deficit Deadlift or Romanian Deadlift', 3, 5, ''),
+    createData('Romanian Deadlift', 3, 5, ''),
     createData('Barbell Row', 3, 8, ''),
     createData('Lat Pulldown', 3, 10, ''),
-    createData('Plank', 3, 'Hold for 60 seconds', '')
+    createData('Plank', 3, '60 seconds', '')
 ];
 
 const day4 = [
-    createData('Squat Variation (e.g., Front Squat)', 3, 6, ''),
+    createData('Front Squat', 3, 6, ''),
     createData('Incline Bench Press', 3, 6, ''),
     createData('Good Mornings', 3, 8, ''),
     createData('Pull-Ups', 3, '8-10', ''),
@@ -41,17 +41,20 @@ const day4 = [
 ];
 
 export default function Powerlifting4x(){
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []);
     return(
         <>
             <Navbar/>
             <div className="content-below-navbar">
                 
                 <div className='title'>
-                    <h1>POWER LIFTING</h1> <SiteLogo/>
+                    <h1>POWERLIFTING</h1> <SiteLogo/>
                 </div>
                 <h2>4X PER WEEK </h2>
                 <h3> DAY 1: SQUAT FOCUS</h3>
-                <WorkoutTable data={day1} routineType="ppowerlifting4x" />
+                <WorkoutTable data={day1} routineType="powerlifting4x" />
                 <h3> DAY 2: BENCH PRESS FOCUS </h3>
                 <WorkoutTable data={day2} routineType="powerlifting4x" />
                 <h3> DAY 3: DEADLIFT FOCUS </h3>

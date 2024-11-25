@@ -59,16 +59,16 @@ export default function Powerlifting5x(){
                 <div className='title'>
                     <h1>POWERLIFTING</h1> <SiteLogo/>
                 </div>
-                <h2>5X PER WEEK </h2>
-                <h3> DAY 1: SQUAT FOCUS</h3>
+                <h5>5X PER WEEK </h5>
+                <h6> DAY 1: SQUAT FOCUS</h6>
                 <WorkoutTable data={day1} routineType="powerlifting5x" />
-                <h3> DAY 2: BENCH FOCUS </h3>
+                <h6> DAY 2: BENCH FOCUS </h6>
                 <WorkoutTable data={day2} routineType="powerlifting5x"/>
-                <h3> DAY 3: DEADLIFT FOCUS </h3>
+                <h6> DAY 3: DEADLIFT FOCUS </h6>
                 <WorkoutTable data={day3} routineType="powerlifting5x" />
-                <h3> DAY 4: WEAK POINTS (UPPER BODY)</h3>
+                <h6> DAY 4: WEAK POINTS (UPPER BODY)</h6>
                 <WorkoutTable data={day4} routineType="powerlifting5x" />
-                <h3> DAY 5: WEAK POINTS (LOWER BODY)</h3>
+                <h6> DAY 5: WEAK POINTS (LOWER BODY)</h6>
                 <WorkoutTable data={day5} routineType="powerlifting5x" />
                 
 

@@ -63,16 +63,16 @@ export default function Bodybuilding5x(){
                 <div className='title'>
                     <h1>PURE BODY BUILDING</h1><SiteLogo/>
                 </div>
-                <h2>4X PER WEEK: UPPER LOWER</h2>
-                <h3> DAY 1: CHEST </h3>
+                <h5>4X PER WEEK: UPPER LOWER</h5>
+                <h6> DAY 1: CHEST </h6>
                 <WorkoutTable data={day1} routineType="bodybuilding5x" />
-                <h3> DAY 2: BACK </h3>
+                <h6> DAY 2: BACK </h6>
                 <WorkoutTable data={day2} routineType="bodybuilding5x" />
-                <h3> DAY 3: SHOULDERS </h3>
+                <h6> DAY 3: SHOULDERS </h6>
                 <WorkoutTable data={day3} routineType="bodybuilding5x" />
-                <h3> DAY 4: ARMS</h3>
+                <h6> DAY 4: ARMS</h6>
                 <WorkoutTable data={day4} routineType="bodybuilding5x" />
-                <h3> DAY 5: LEGS</h3>
+                <h6> DAY 5: LEGS</h6>
                 <WorkoutTable data={day5} routineType="bodybuilding5x" />
             </div> 
         </>

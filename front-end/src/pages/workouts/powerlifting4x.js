@@ -52,14 +52,14 @@ export default function Powerlifting4x(){
                 <div className='title'>
                     <h1>POWERLIFTING</h1> <SiteLogo/>
                 </div>
-                <h2>4X PER WEEK </h2>
-                <h3> DAY 1: SQUAT FOCUS</h3>
+                <h5>4X PER WEEK </h5>
+                <h6> DAY 1: SQUAT FOCUS</h6>
                 <WorkoutTable data={day1} routineType="powerlifting4x" />
-                <h3> DAY 2: BENCH PRESS FOCUS </h3>
+                <h6> DAY 2: BENCH PRESS FOCUS </h6>
                 <WorkoutTable data={day2} routineType="powerlifting4x" />
-                <h3> DAY 3: DEADLIFT FOCUS </h3>
+                <h6> DAY 3: DEADLIFT FOCUS </h6>
                 <WorkoutTable data={day3} routineType="powerlifting4x" />
-                <h3> DAY 4: ACCESSORY/WEAK POINTS</h3>
+                <h6> DAY 4: ACCESSORY/WEAK POINTS</h6>
                 <WorkoutTable data={day4} routineType="powerlifting4x" />
                 
 

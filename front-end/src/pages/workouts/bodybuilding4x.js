@@ -59,14 +59,14 @@ export default function Bodybuilding4x(){
                 <div className='title'>
                     <h1>PURE BODYBUILDING</h1> <SiteLogo/>
                 </div>
-                <h2>4X PER WEEK: UPPER LOWER</h2>
-                <h3> DAY 1: UPPER BODY </h3>
+                <h5>4X PER WEEK: UPPER LOWER</h5>
+                <h6> DAY 1: UPPER BODY </h6>
                 <WorkoutTable data={day1} routineType="bodybuilding4x" />
-                <h3> DAY 2: LOWER BODY </h3>
+                <h6> DAY 2: LOWER BODY </h6>
                 <WorkoutTable data={day2} routineType="bodybuilding4x" />
-                <h3> DAY 3: UPPER BODY </h3>
+                <h6> DAY 3: UPPER BODY </h6>
                 <WorkoutTable data={day3} routineType="bodybuilding4x" />
-                <h3> DAY 4: LOWER BODY</h3>
+                <h6> DAY 4: LOWER BODY</h6>
                 <WorkoutTable data={day4} routineType="bodybuilding4x" />
             </div> 
         </>

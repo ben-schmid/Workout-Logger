@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
+import certifi
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ atlas_password = os.getenv("MONGO_PASSWORD")
 dbname = "mydb"
 connection = f'mongodb+srv://{username}:{atlas_password}@cluster0.x20eh.mongodb.net/{dbname}?retryWrites=true&w=majority&appName=Cluster0'
 
-mongo_client = MongoClient(connection)
+mongo_client = MongoClient(connection, tlsCAFile=certifi.where())
 db = mongo_client[dbname]
 
 @app.route('/api/login', methods=['POST']) #listens for post requests from "/api/login"

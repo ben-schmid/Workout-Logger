@@ -66,16 +66,16 @@ export default function Ppl5x(){
                 <div className='title'>
                     <h1>PUSH PULL LEGS</h1> <SiteLogo/>
                 </div>
-                <h2>5X PER WEEK</h2>
-                <h3> DAY 1: PUSH </h3>
+                <h5>5X PER WEEK</h5>
+                <h6> DAY 1: PUSH </h6>
                 <WorkoutTable data={day1} routineType="ppl5x" />
-                <h3> DAY 2: PULL </h3>
+                <h6> DAY 2: PULL </h6>
                 <WorkoutTable data={day2} routineType="ppl5x" />
-                <h3> DAY 3: LEGS </h3>
+                <h6> DAY 3: LEGS </h6>
                 <WorkoutTable data={day3} routineType="ppl5x" />
-                <h3> DAY 4: UPPER BODY </h3>
+                <h6> DAY 4: UPPER BODY </h6>
                 <WorkoutTable data={day4} routineType="ppl5x" />
-                <h3> DAY 5: LOWER BODY </h3>
+                <h6> DAY 5: LOWER BODY </h6>
                 <WorkoutTable data={day5} routineType="ppl5x" />
             </div> 
         </>

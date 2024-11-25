@@ -69,18 +69,18 @@ export default function Ppl6x(){
                 <div className='title'>
                     <h1>PUSH PULL LEGS</h1> <SiteLogo/>
                 </div>
-                <h2>6X PER WEEK</h2>
-                <h3> DAY 1: PUSH  </h3>
+                <h5>6X PER WEEK</h5>
+                <h6> DAY 1: PUSH  </h6>
                 <WorkoutTable data={day1} routineType="ppl6x" />
-                <h3> DAY 2: PULL  </h3>
+                <h6> DAY 2: PULL  </h6>
                 <WorkoutTable data={day2} routineType="ppl6x" />
-                <h3> DAY 3: LEGS </h3>
+                <h6> DAY 3: LEGS </h6>
                 <WorkoutTable data={day3} routineType="ppl6x" />
-                <h3> DAY 4: PUSH  </h3>
+                <h6> DAY 4: PUSH  </h6>
                 <WorkoutTable data={day4} routineType="ppl6x" />
-                <h3> DAY 5: PULL </h3>
+                <h6> DAY 5: PULL </h6>
                 <WorkoutTable data={day5} routineType="ppl6x" />
-                <h3> DAY 6: LEGS </h3>
+                <h6> DAY 6: LEGS </h6>
                 <WorkoutTable data={day6} routineType="ppl6x" />
             </div> 
         </>

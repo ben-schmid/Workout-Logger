@@ -55,16 +55,16 @@ export default function Fundamentals5x(){
                 <div className='title'>
                     <h1>FUNDAMENTALS</h1> <SiteLogo/>
                 </div>
-                <h2>5X PER WEEK: BODY PART SPLIT </h2>
-                <h3> DAY 1: CHEST </h3>
+                <h5>5X PER WEEK: BODY PART SPLIT </h5>
+                <h6> DAY 1: CHEST </h6>
                 <WorkoutTable data={day1} routineType="fundamentals5x" />
-                <h3> DAY 2: BACK</h3>
+                <h6> DAY 2: BACK</h6>
                 <WorkoutTable data={day2} routineType="fundamentals5x" />
-                <h3> DAY 3: SHOULDERS </h3>
+                <h6> DAY 3: SHOULDERS </h6>
                 <WorkoutTable data={day3} routineType="fundamentals5x" />
-                <h3> DAY 4: LEGS </h3>
+                <h6> DAY 4: LEGS </h6>
                 <WorkoutTable data={day4} routineType="fundamentals5x" />
-                <h3> DAY 5: ARMS </h3>
+                <h6> DAY 5: ARMS </h6>
                 <WorkoutTable data={day5} routineType="fundamentals5x" />
             </div>
         </>

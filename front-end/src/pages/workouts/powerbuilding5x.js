@@ -63,16 +63,16 @@ export default function Powerbuilding5x(){
                 <div className='title'>
                     <h1>POWERBUILDING</h1> <SiteLogo/>
                 </div>
-                <h2>5X PER WEEK </h2>
-                <h3> DAY 1: CHEST AND BACK (STRENGTH)</h3>
+                <h5>5X PER WEEK </h5>
+                <h6> DAY 1: CHEST AND BACK (STRENGTH)</h6>
                 <WorkoutTable data={day1} routineType="powerbuildingx5" />
-                <h3> DAY 2: LOWER BODY (STRENGTH) </h3>
+                <h6> DAY 2: LOWER BODY (STRENGTH) </h6>
                 <WorkoutTable data={day2} routineType="powerbuildingx5" />
-                <h3> DAY 3: SHOULDERS AND ARMS (HYPERTROPHY) </h3>
+                <h6> DAY 3: SHOULDERS AND ARMS (HYPERTROPHY) </h6>
                 <WorkoutTable data={day3} routineType="powerbuildingx5" />
-                <h3> DAY 4: UPPER BODY (HYPERTROPHY)</h3>
+                <h6> DAY 4: UPPER BODY (HYPERTROPHY)</h6>
                 <WorkoutTable data={day4} routineType="powerbuildingx5" />
-                <h3> DAY 5: LOWER BODY (HYPERTROPHY)</h3>
+                <h6> DAY 5: LOWER BODY (HYPERTROPHY)</h6>
                 <WorkoutTable data={day5} routineType="powerbuildingx5" />
 
             </div> 

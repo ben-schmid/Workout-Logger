@@ -44,12 +44,12 @@ export default function Fundamentals3x(){
                 <div className='title'>
                     <h1>FUNDAMENTALS</h1> <SiteLogo/>
                 </div>
-                <h2>3X PER WEEK: FULL BODY SPLIT</h2>
-                <h3> DAY 1: FULL BODY </h3>
+                <h5>3X PER WEEK: FULL BODY SPLIT</h5>
+                <h6> DAY 1: FULL BODY </h6>
                 <WorkoutTable data={day1} routineType="fundamentals3x" />
-                <h3> DAY 2: FULL BODY</h3>
+                <h6> DAY 2: FULL BODY</h6>
                 <WorkoutTable data={day2} routineType="fundamentals3x" />
-                <h3> DAY 3: FULL BODY </h3>
+                <h6> DAY 3: FULL BODY </h6>
                 <WorkoutTable data={day3} routineType="fundamentals3x" />
             </div>
         </>

@@ -3,6 +3,7 @@ import bcrypt
 import re
 from dotenv import load_dotenv
 import os
+import certifi
 
 class User:
     def __init__(self, email, password, name):
@@ -15,7 +16,7 @@ class User:
             atlas_password = os.getenv("MONGO_PASSWORD")
             dbname = "mydb"
             connection = f'mongodb+srv://{username}:{atlas_password}@cluster0.x20eh.mongodb.net/{dbname}?retryWrites=true&w=majority&appName=Cluster0'
-            self.client = MongoClient(connection) 
+            self.client = MongoClient(connection, tlsCAFile=certifi.where()) 
             self.db = self.client['mydb']
             self.users_collection = self.db['user_accounts']
             print("Connection Made")
@@ -30,7 +31,7 @@ class User:
             dbname = "mydb"
             connection = f'mongodb+srv://{username}:{atlas_password}@cluster0.x20eh.mongodb.net/{dbname}?retryWrites=true&w=majority&appName=Cluster0'
 
-            client = MongoClient(connection) 
+            client = MongoClient(connection,tlsCAFile=certifi.where()) 
             db = client[dbname]
             users_collection = db['user_accounts']
             print("Connection Made for login")

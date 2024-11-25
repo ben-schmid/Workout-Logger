@@ -62,18 +62,18 @@ export default function Powerlifting6x(){
                 <div className='title'>
                     <h1>POWERLIFTING</h1> <SiteLogo/>
                 </div>
-                <h2>6X PER WEEK </h2>
-                <h3> DAY 1: HEAVY SQUAT</h3>
+                <h5>6X PER WEEK </h5>
+                <h6> DAY 1: HEAVY SQUAT</h6>
                 <WorkoutTable data={day1} routineType="powerlifting6x" />
-                <h3> DAY 2: HEAVY BENCH </h3>
+                <h6> DAY 2: HEAVY BENCH </h6>
                 <WorkoutTable data={day2} routineType="powerlifting6x"/>
-                <h3> DAY 3: HEAVY DEADLIFT  </h3>
+                <h6> DAY 3: HEAVY DEADLIFT  </h6>
                 <WorkoutTable data={day3} routineType="powerlifting6x" />
-                <h3> DAY 4: TECHNIQUE SQUAT</h3>
+                <h6> DAY 4: TECHNIQUE SQUAT</h6>
                 <WorkoutTable data={day4} routineType="powerlifting6x" />
-                <h3> DAY 5: TECHNIQUE BENCH </h3>
+                <h6> DAY 5: TECHNIQUE BENCH </h6>
                 <WorkoutTable data={day5} routineType="powerlifting6x" />
-                <h3> DAY 6: TECHNIQUE DEADLIFT </h3>
+                <h6> DAY 6: TECHNIQUE DEADLIFT </h6>
                 <WorkoutTable data={day6} routineType="powerlifting6x" />
             </div> 
         </>

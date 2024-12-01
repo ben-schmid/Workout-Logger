@@ -52,9 +52,9 @@ export default function Home (){
             <Navbar/>
             <section class = "hidden">
                 <div className = 'title'>
-                    <h1>Workout Generator </h1> <SiteLogo/>
+                    <h1>Workout Logger </h1> <SiteLogo/>
                 </div>
-                    <h3>Get Off Your Ass</h3>
+                    <h3>Track Your Progress, and Get Big</h3>
             </section>
 
             {/* <section class = "hidden">
